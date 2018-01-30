@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from nose.tools import assert_raises
 import time
 import logging
 import sys
@@ -23,15 +24,13 @@ def teardown(self):
 def setup_class(cls):
     print ("setup_class() before any methods in this class")
 
-def TestLoginEWA_200():
+def TestLoginEWA_214():
     driver.get(Get_Config.File_Output('URL'))
     time.sleep(3)
-    driver.find_element_by_id("email").send_keys("manu@celestialsys.com")
+    if (driver.find_element_by_id("password").getAttribute("type") == 'password'):
+        assert_equals('password field works good','password field works good')
+    else:
+         assert_equals('password field','is not defined')
+         
     time.sleep(3)
-    driver.find_element_by_id("password").send_keys("12345678")
-    time.sleep(3)
-    driver.find_element_by_id("loginButton").click()
-    time.sleep(4)
-    driver.find_element_by_id("home")
-    time.sleep(4)
     driver.close()
